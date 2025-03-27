@@ -3,6 +3,7 @@ package com.sanjeev.learnings.springboot.patient.management.system.service;
 
 import com.sanjeev.learnings.springboot.patient.management.system.dto.PatientRequestDTO;
 import com.sanjeev.learnings.springboot.patient.management.system.dto.PatientResponseDTO;
+import com.sanjeev.learnings.springboot.patient.management.system.exception.EmailAlreadyExistsException;
 import com.sanjeev.learnings.springboot.patient.management.system.mapper.PatientMapper;
 import com.sanjeev.learnings.springboot.patient.management.system.model.Patient;
 import com.sanjeev.learnings.springboot.patient.management.system.repository.PatientRepository;
@@ -20,7 +21,10 @@ public class PatientService {
 
     public List<PatientResponseDTO> getAllPatients() { return patientRepository.findAll().stream().map(PatientMapper::toDTO).collect(Collectors.toList()); }
 
-    public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO) {
+    public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO) throws EmailAlreadyExistsException {
+        if (patientRepository.existsByEmail(patientRequestDTO.getEmail())) {
+            throw new EmailAlreadyExistsException("Patient with email " + patientRequestDTO.getEmail() + " already exists");
+        }
         Patient patient = PatientMapper.toModel(patientRequestDTO);
         if (patient.getId() == null) {
             patient.setId(UUID.randomUUID().toString());
