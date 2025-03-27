@@ -1,6 +1,7 @@
 package com.sanjeev.learnings.springboot.patient.management.system.model;
 
 
+import com.sanjeev.learnings.springboot.patient.management.system.utils.UUIDConverter;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -12,8 +13,7 @@ import java.util.UUID;
 public class Patient {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private String id;
 
     @NotNull
     private String name;
@@ -32,11 +32,11 @@ public class Patient {
     @NotNull
     private LocalDate registeredDate;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 

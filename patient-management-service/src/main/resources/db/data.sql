@@ -1,3 +1,7 @@
+CREATE DATABASE IF NOT EXISTS patient_db;
+
+USE patient_db;
+
 -- Ensure the 'patient' table exists
 CREATE TABLE patient (
     id              CHAR(36) PRIMARY KEY,  -- MySQL doesn't have UUID
