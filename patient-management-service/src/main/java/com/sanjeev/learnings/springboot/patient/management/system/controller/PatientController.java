@@ -2,6 +2,7 @@ package com.sanjeev.learnings.springboot.patient.management.system.controller;
 
 import com.sanjeev.learnings.springboot.patient.management.system.dto.PatientRequestDTO;
 import com.sanjeev.learnings.springboot.patient.management.system.dto.PatientResponseDTO;
+import com.sanjeev.learnings.springboot.patient.management.system.exception.EmailAlreadyExistsException;
 import com.sanjeev.learnings.springboot.patient.management.system.service.PatientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class PatientController {
     }
 
     @PostMapping
-    public ResponseEntity<PatientResponseDTO> addPatient(@Valid @RequestBody PatientRequestDTO patientRequestDTO) {
+    public ResponseEntity<PatientResponseDTO> addPatient(@Valid @RequestBody PatientRequestDTO patientRequestDTO) throws EmailAlreadyExistsException {
         return ResponseEntity.ok(patientService.createPatient(patientRequestDTO));
     }
 }
