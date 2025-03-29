@@ -1,5 +1,6 @@
 package com.sanjeev.learnings.springboot.patient.management.system.dto;
 
+import com.sanjeev.learnings.springboot.patient.management.system.dto.validators.CreatePatientValidationGroup;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -19,7 +20,11 @@ public class PatientRequestDTO {
     @NotBlank(message = "Date of birth is required")
     private String dateOfBirth;
 
-    @NotBlank(message = "Registered date is required")
+    /**
+     * This validation group will be used to validate only when we have specified to validate the fields in the request
+     * By default all the fields will be validated but this will not unless we have passed this group name in @Validated
+     * */
+    @NotBlank(groups = CreatePatientValidationGroup.class, message = "Registered date is required")
     private String registeredDate;
 
     public String getName() {
