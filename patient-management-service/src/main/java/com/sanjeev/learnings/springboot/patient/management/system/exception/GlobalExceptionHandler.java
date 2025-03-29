@@ -28,10 +28,4 @@ public class GlobalExceptionHandler {
         logger.warn("Email address already exist {}", ex.getMessage());
         return ResponseEntity.badRequest().body(Map.of("message", ex.getMessage()));
     }
-
-    @ExceptionHandler(PatientNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handlePatientNotFoundException(PatientNotFoundException ex) {
-        logger.warn("Patient not found {}", ex.getMessage());
-        return ResponseEntity.badRequest().body(Map.of("message", ex.getMessage()));
-    }
 }
