@@ -10,4 +10,5 @@ import java.util.UUID;
 public interface PatientRepository extends JpaRepository<Patient, String> {
     //JPA repository gives these method implementations at run time
     boolean existsByEmail(String email);
+    boolean existsByEmailAndIdNot(String email, String id);
 }
